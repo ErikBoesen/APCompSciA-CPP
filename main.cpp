@@ -1,15 +1,24 @@
-#include <QApplication>
-#include <QWidget>
+#include <QTextStream>
 
 int main(int argc, char *argv[]) {
 
-    QApplication app(argc, argv);
+    QTextStream out(stdout);
 
-    QWidget window;
+    // Define an example QString for test manipulation
+    QString aString = "is a testing QString";
+    out << aString << endl;
 
-    window.resize(500, 400);
-    window.setWindowTitle("Assignment 1");
-    window.show();
+    // Add to the start of the string
+    aString.prepend("This ");
+    out << aString << endl;
+    // Add a period to the end of the sentence
+    aString.append(".");
+    out << aString << endl;
 
-    return app.exec();
+    out << "The string is " << aString.count() << " chars long!" << endl;
+
+    out << "In lcase: " << aString.toLower() << endl;
+    out << "In ucase: " << aString.toUpper() << endl;
+
+    out << "Third char: " << aString[2] << endl;
 }

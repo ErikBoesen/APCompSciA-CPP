@@ -1,3 +1,7 @@
+# Compiled things
+*.app
+*.exe
+
 # C++ objects and libs
 
 *.slo
