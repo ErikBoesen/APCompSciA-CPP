@@ -6,5 +6,10 @@ TEMPLATE = app
 TARGET = APCompSciA-CPP
 INCLUDEPATH += .
 
+QT += gui widgets
+
 # Input
 SOURCES += main.cpp
+
+HEADERS += \
+    main.h

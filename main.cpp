@@ -1,24 +1,40 @@
-#include <QTextStream>
+#include "main.h"
+
+Window::Window(QWidget *parent) : QWidget(parent) {
+
+    QPushButton *quit = new QPushButton("Quit", this);
+    QLineEdit *textBox = new QLineEdit();
+    QPushButton *render = new QPushButton("Render", this);
+    lbl = new QLabel("0", this);
+    lbl->setAlignment(Qt::AlignCenter);
+
+    QGridLayout *grid = new QGridLayout(this);
+    grid->addWidget(quit, 0, 0);
+    grid->addWidget(textBox, 0, 1);
+    grid->addWidget(render, 0, 2);
+    grid->addWidget(lbl, 0, 3);
+
+    setLayout(grid);
+
+    connect(quit, &QPushButton::clicked, qApp, &QApplication::quit);
+    connect(render, &QPushButton::clicked, this, &Window::Render);
+}
+
+void Window::Render() {
+    std::string rawText = textBox->text().toStdString();
+    QString text = QString::fromLatin1(rawText.data(), rawText.size());
+    lbl->setText(text);
+}
 
 int main(int argc, char *argv[]) {
 
-    QTextStream out(stdout);
+    QApplication app(argc, argv);
 
-    // Define an example QString for test manipulation
-    QString aString = "is a testing QString";
-    out << aString << endl;
+    Window window;
 
-    // Add to the start of the string
-    aString.prepend("This ");
-    out << aString << endl;
-    // Add a period to the end of the sentence
-    aString.append(".");
-    out << aString << endl;
+    window.setWindowTitle("Testing");
+    window.resize(300, 100);
+    window.show();
 
-    out << "The string is " << aString.count() << " chars long!" << endl;
-
-    out << "In lcase: " << aString.toLower() << endl;
-    out << "In ucase: " << aString.toUpper() << endl;
-
-    out << "Third char: " << aString[2] << endl;
+    return app.exec();
 }
