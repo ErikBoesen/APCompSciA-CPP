@@ -3,7 +3,7 @@
 Window::Window(QWidget *parent) : QWidget(parent) {
 
     QPushButton *quit = new QPushButton("Quit", this);
-    QLineEdit *textBox = new QLineEdit();
+    textBox = new QLineEdit();
     QPushButton *render = new QPushButton("Render", this);
     lbl = new QLabel("0", this);
     lbl->setAlignment(Qt::AlignCenter);
@@ -21,9 +21,7 @@ Window::Window(QWidget *parent) : QWidget(parent) {
 }
 
 void Window::Render() {
-    std::string rawText = textBox->text().toStdString();
-    QString text = QString::fromLatin1(rawText.data(), rawText.size());
-    lbl->setText(text);
+    lbl->setText(textBox->text());
 }
 
 int main(int argc, char *argv[]) {
@@ -33,7 +31,7 @@ int main(int argc, char *argv[]) {
     Window window;
 
     window.setWindowTitle("Testing");
-    window.resize(300, 100);
+    window.resize(500, 50);
     window.show();
 
     return app.exec();
