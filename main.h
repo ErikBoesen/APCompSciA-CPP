@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QGridLayout>
+#include <QRect>
 
 class Window : public QWidget {
 
