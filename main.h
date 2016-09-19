@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QLabel>
 #include <QGridLayout>
 #include <QRect>
@@ -17,6 +18,8 @@ class Window : public QWidget {
         void Render();
 
     private:
-        QLineEdit *textBox;
+        QLineEdit *num1;
+        QLineEdit *num2;
+        QComboBox *operation;
         QLabel *lbl;
 };
