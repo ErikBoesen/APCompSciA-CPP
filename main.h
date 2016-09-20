@@ -3,11 +3,12 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
+#include <QPixmap>
+#include <QIcon>
 #include <QLineEdit>
 #include <QComboBox>
 #include <QLabel>
 #include <QGridLayout>
-#include <QRect>
 
 class Window : public QWidget {
 
@@ -15,7 +16,7 @@ class Window : public QWidget {
         Window(QWidget *parent = 0);
 
     private slots:
-        void Render();
+        void Calculate();
 
     private:
         QLineEdit *num1;
