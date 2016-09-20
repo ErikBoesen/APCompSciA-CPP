@@ -2,49 +2,36 @@
 
 Window::Window(QWidget *parent) : QWidget(parent) {
 
-    QPushButton *quit = new QPushButton("Quit", this);
-    num1 = new QLineEdit();
-    num1->setMinimumWidth(50);
-    num2 = new QLineEdit();
-    num2->setMinimumWidth(50);
-    operation = new QComboBox();
-    operation->addItem("+");
-    operation->addItem("-");
-    operation->addItem("*");
-    operation->addItem("/");
-    QPushButton *render = new QPushButton("Render", this);
+    QLabel *lowlbl = new QLabel("Lower Limit (noninclusive):", this);
+    QLabel *highlbl = new QLabel("Higher Limit:", this);
+    low = new QLineEdit();
+    high = new QLineEdit();
+    low->setMinimumWidth(50);
+    high->setMinimumWidth(50);
+    QPushButton *choose = new QPushButton("Choose", this);
     lbl = new QLabel(this);
-    lbl->setWordWrap(true);
 
     QGridLayout *grid = new QGridLayout(this);
-    grid->addWidget(quit, 0, 0);
-    grid->addWidget(num1, 0, 1);
-    grid->addWidget(operation, 0, 2);
-    grid->addWidget(num2, 0, 3);
-    grid->addWidget(render, 0, 4);
+    grid->addWidget(lowlbl, 0, 0);
+    grid->addWidget(low, 0, 1);
+    grid->addWidget(highlbl, 0, 2);
+    grid->addWidget(high, 0, 3);
+    grid->addWidget(choose, 0, 4);
     grid->addWidget(lbl, 0, 5);
 
     setLayout(grid);
 
-    connect(quit, &QPushButton::clicked, qApp, &QApplication::quit);
-    connect(render, &QPushButton::clicked, this, &Window::Calculate);
+    connect(choose, &QPushButton::clicked, this, &Window::GenerateRandom);
 }
 
-void Window::Calculate() {
+void Window::GenerateRandom() {
 
-    switch (operation->currentIndex()) {
-        case 0:
-            lbl->setText(QString::number(num1->text().toDouble() + num2->text().toDouble()));
-            break;
-        case 1:
-            lbl->setText(QString::number(num1->text().toDouble() - num2->text().toDouble()));
-            break;
-        case 2:
-            lbl->setText(QString::number(num1->text().toDouble() * num2->text().toDouble()));
-            break;
-        case 3:
-            lbl->setText(QString::number(num1->text().toDouble() / num2->text().toDouble()));
-            break;
+    int lowNum = low->text().toInt();
+    int highNum = high->text().toInt();
+    if (lowNum < highNum) {
+        lbl->setText(QString::number(rand() % (highNum - lowNum) + lowNum + 1));
+    } else {
+        lbl->setText("Error.");
     }
 }
 
@@ -54,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     Window window;
 
-    window.setWindowTitle("Calculator");
+    window.setWindowTitle("Random Number Chooser");
     window.resize(200, 50);
     window.show();
 
