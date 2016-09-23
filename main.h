@@ -9,7 +9,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QGridLayout>
-#include <QtGlobal>
+#include <cmath>
 
 class Window : public QWidget {
 
@@ -17,10 +17,11 @@ class Window : public QWidget {
         Window(QWidget *parent = 0);
 
     private slots:
-        void GenerateRandom();
+        void CalculateArea();
 
     private:
-        QLineEdit *low;
-        QLineEdit *high;
+        QLineEdit *side1;
+        QLineEdit *side2;
+        QLineEdit *side3;
         QLabel *lbl;
 };
